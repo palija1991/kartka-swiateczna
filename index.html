@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kartka Świąteczna</title>
+
+<style>
+body {
+  margin: 0;
+  background: radial-gradient(#1b2735, #090a0f);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  font-family: Georgia, serif;
+}
+
+/* ŚNIEG */
+.snowflake {
+  position: fixed;
+  top: -10px;
+  color: white;
+  opacity: 0.8;
+  animation: fall linear infinite;
+}
+@keyframes fall {
+  to { transform: translateY(110vh); }
+}
+
+/* SCENA */
+.scene {
+  perspective: 1200px;
+  z-index: 2;
+}
+
+.card {
+  width: 90vw;
+  max-width: 360px;
+  height: 240px;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 1.2s;
+}
+
+.card.open {
+  transform: rotateY(-160deg);
+}
+
+.side {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  backface-visibility: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.6);
+}
+
+/* OKŁADKA */
+.front {
+  background: url('foto.jpg') center/cover no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  color: white;
+  padding-bottom: 16px;
+  text-shadow: 0 3px 6px black;
+}
+
+.front h1 {
+  font-size: 22px;
+  margin: 0;
+}
+
+/* ŚRODEK */
+.inside {
+  background: #f6efe4;
+  transform: rotateY(180deg);
+  padding: 20px;
+  box-sizing: border-box;
+  color: #5a3e2b;
+  font-size: 14px;
+  text-align: center;
+}
+
+.inside h2 {
+  margin-top: 0;
+  font-size: 18px;
+}
+
+.signature {
+  margin-top: 15px;
+  text-align: right;
+  font-style: italic;
+}
+
+/* PRZYCISK */
+.open-btn {
+  position: fixed;
+  bottom: 30px;
+  background: #c9a24d;
+  color: #fff;
+  padding: 12px 20px;
+  border-radius: 30px;
+  font-size: 16px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" src="swiec-gwiazdeczko.mp3"></audio>
+
+<div class="scene">
+  <div class="card" id="card">
+    <div class="side front">
+      <h1>Wesołych Świąt 🎄</h1>
+    </div>
+    <div class="side inside">
+      <h2>✨ Wesołych Świąt ✨</h2>
+      <p>
+        Zdrowych, spokojnych i pełnych rodzinnego ciepła<br>
+        Świąt Bożego Narodzenia<br>
+        oraz szczęścia i spełnienia marzeń<br>
+        w nadchodzącym Nowym Roku.
+      </p>
+      <div class="signature">
+        Życzy<br>
+        <strong>Rodzinka Marciniaków</strong>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="open-btn" onclick="openCard()">👉 Otwórz kartkę</div>
+
+<script>
+function openCard() {
+  document.getElementById('card').classList.toggle('open');
+  document.getElementById('music').play();
+}
+
+/* ŚNIEG – lekki dla telefonu */
+for (let i = 0; i < 25; i++) {
+  let snow = document.createElement('div');
+  snow.className = 'snowflake';
+  snow.innerHTML = '❄';
+  snow.style.left = Math.random() * 100 + 'vw';
+  snow.style.animationDuration = 6 + Math.random() * 4 + 's';
+  snow.style.fontSize = 10 + Math.random() * 14 + 'px';
+  document.body.appendChild(snow);
+}
+</script>
+
+</body>
+</html>
